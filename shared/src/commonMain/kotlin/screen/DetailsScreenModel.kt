@@ -22,10 +22,11 @@ class DetailScreenModel(
 
     fun countNumbers() {
         coroutineScope.launch {
-            repository.getAllList()
-                .collect {
-                    _items.value = it
-                }
+            _items.value =   repository.selectAll().firstOrNull()?.player_number?.toInt() ?: -1
+//            repository.getAllList()
+//                .collect {
+//                    _items.value = it
+//                }
         }
     }
 

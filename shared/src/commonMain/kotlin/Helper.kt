@@ -5,14 +5,15 @@ import screen.DetailScreenModel
 
 
 val homeModule = module {
+    factory { DriverFactory. }
     factory { DetailScreenModel(get()) }
-    single { HomeRepository() }
+    single { HomeRepository(get()) }
 }
 
-fun initKoin(){
+fun initKoin() {
     fun appModule() = listOf(homeModule)
-
     startKoin {
         modules(appModule())
     }
 }
+
