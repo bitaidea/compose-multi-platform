@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jetbrains.compose")
+    id("app.cash.sqldelight")
 }
 
 kotlin {
@@ -37,7 +38,7 @@ kotlin {
                 api("androidx.activity:activity-compose:1.8.0")
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.12.0")
-
+                implementation("app.cash.sqldelight:android-driver:2.0.0")
 
             }
         }
@@ -49,6 +50,9 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                implementation("app.cash.sqldelight:native-driver:2.0.0")
+            }
         }
     }
 }
@@ -74,6 +78,12 @@ android {
 }
 
 
-
+sqldelight {
+    databases {
+        create("MowjDatabase") {
+            packageName.set("com.myapplication")
+        }
+    }
+}
 
 
