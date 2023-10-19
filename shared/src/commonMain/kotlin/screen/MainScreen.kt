@@ -18,10 +18,9 @@ import androidx.compose.ui.Modifier
 import getPlatformName
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import route.MainComponent
 
 @Composable
-fun MainScreen(component: MainComponent) {
+fun MainScreen() {
     var greetingText by remember { mutableStateOf("Hello, World!") }
     var showImage by remember { mutableStateOf(false) }
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {

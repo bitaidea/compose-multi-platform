@@ -27,9 +27,9 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
 
-                implementation("com.arkivanov.decompose:decompose:2.1.2-compose-experimental")
-                implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.1.2-compose-experimental")
-
+//                implementation("com.arkivanov.decompose:decompose:2.1.2-compose-experimental")
+//                implementation("com.arkivanov.decompose:extensions-compose-jetbrains:2.1.2-compose-experimental")
+                implementation("cafe.adriel.voyager:voyager-navigator:1.0.0-rc05")
             }
         }
         val androidMain by getting {

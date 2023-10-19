@@ -1,23 +1,17 @@
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import cafe.adriel.voyager.navigator.Navigator
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import route.RootComponent
-import route.RootContent
+import screen.HomeScreen
+import screen.MainScreen
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun App() {
 
-    val lifecycle = LifecycleRegistry()
-    val root = DefaultRootComponent(componentContext = DefaultComponentContext(lifecycle))
-
-
-    val ro2ot = RootComponent(DefaultComponentContext(lifecycle))
-
     MaterialTheme {
-        RootContent(root)
+//        MainScreen()
+        Navigator(HomeScreen())
     }
 }
 
