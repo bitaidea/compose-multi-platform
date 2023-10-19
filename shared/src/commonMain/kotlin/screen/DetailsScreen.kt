@@ -10,7 +10,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.kodein.rememberScreenModel
+import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
@@ -19,7 +19,8 @@ data class DetailScreen(private val itemId: Int) : Screen {
     @Composable
     override fun Content() {
 //        val screenModel = rememberScreenModel<DetailScreenModel> { DetailScreenModel() }
-        val screenModel = rememberScreenModel<DetailScreenModel>()
+//        val screenModel = rememberScreenModel<DetailScreenModel>()
+        val screenModel = getScreenModel<DetailScreenModel>()
 
         val state by screenModel.state.collectAsState()
 

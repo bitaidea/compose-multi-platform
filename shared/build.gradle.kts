@@ -27,10 +27,11 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
 
-                implementation("cafe.adriel.voyager:voyager-navigator:1.0.0-rc05")
-                implementation("cafe.adriel.voyager:voyager-kodein:1.0.0-rc05")
-                implementation("org.kodein.di:kodein-di-framework-compose:7.20.1")
-//                implementation ("io.insert-koin:koin-core:3.5.0")
+                implementation("cafe.adriel.voyager:voyager-navigator:1.0.0-rc07")
+                implementation("cafe.adriel.voyager:voyager-koin:1.0.0-rc07")
+//                implementation("cafe.adriel.voyager:voyager-kodein:1.0.0-rc07")
+//                implementation("org.kodein.di:kodein-di-framework-compose:7.20.1")
+                implementation ("io.insert-koin:koin-core:3.5.0")
             }
         }
         val androidMain by getting {
