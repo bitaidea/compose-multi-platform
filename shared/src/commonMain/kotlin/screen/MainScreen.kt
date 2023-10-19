@@ -15,26 +15,37 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
 import getPlatformName
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 
-@Composable
-fun MainScreen() {
-    var greetingText by remember { mutableStateOf("Hello, World!") }
-    var showImage by remember { mutableStateOf(false) }
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = {
-            greetingText = "Hello, ${getPlatformName()}"
-            showImage = !showImage
-        }) {
-            Text(greetingText)
-        }
-        AnimatedVisibility(showImage) {
-            Image(
-                painterResource("compose-multiplatform.xml"),
-                null
-            )
+
+class HomeScreen : Screen {
+    @Composable
+    override fun Content() {
+        val navigator = LocalNavigator.current
+
+        var greetingText by remember { mutableStateOf("Hello, World!") }
+        var showImage by remember { mutableStateOf(false) }
+        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+            Button(onClick = { navigator?.push(DetailScreen(itemId = 123)) }) {
+                Text("View details")
+            }
+            Button(onClick = {
+                greetingText = "Hello, ${getPlatformName()}"
+                showImage = !showImage
+            }) {
+                Text(greetingText)
+            }
+            AnimatedVisibility(showImage) {
+                Image(
+                    painterResource("compose-multiplatform.xml"),
+                    null
+                )
+            }
         }
     }
 }
+
