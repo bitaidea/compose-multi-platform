@@ -1,4 +1,4 @@
-@file:OptIn(ExperimentalResourceApi::class)
+@file:OptIn(ExperimentalResourceApi::class, ExperimentalResourceApi::class)
 
 package screen
 
@@ -18,9 +18,10 @@ import androidx.compose.ui.Modifier
 import getPlatformName
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import route.MainComponent
 
 @Composable
-fun MainScreen() {
+fun MainScreen(component: MainComponent) {
     var greetingText by remember { mutableStateOf("Hello, World!") }
     var showImage by remember { mutableStateOf(false) }
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
