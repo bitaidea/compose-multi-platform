@@ -1,10 +1,12 @@
+import Repository.HomeRepository
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import screen.DetailScreenModel
 
 
 val homeModule = module {
-    factory { DetailScreenModel() }
+    factory { DetailScreenModel(get()) }
+    single { HomeRepository() }
 }
 
 fun initKoin(){

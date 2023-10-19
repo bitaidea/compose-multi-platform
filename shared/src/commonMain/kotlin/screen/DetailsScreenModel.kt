@@ -1,27 +1,42 @@
 package screen
 
+import Repository.HomeRepository
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class DetailScreenModel(
-//    private val repository: PostRepository
+    private val repository: HomeRepository
 ) : StateScreenModel<DetailScreenModel.State>(State.Init) {
 
     sealed class State {
         object Init : State()
         object Loading : State()
-        data class Result(val post: Post) : State()
+        data class Result(val savedId: Int) : State()
     }
 
-    fun getPost(id: Int) {
+    private val _items = MutableStateFlow<Int>(1)
+    val items = _items.asStateFlow()
+
+    fun countNumbers() {
         coroutineScope.launch {
-            mutableState.value = State.Loading
-            delay(2000)
-            mutableState.value = State.Result(post = Post(id,"salam"))
+            repository.getAllList()
+                .collect {
+                    _items.value = it
+                }
         }
     }
+
+    fun save() {
+        coroutineScope.launch {
+            mutableState.value = State.Loading
+            mutableState.value = State.Result(repository.save())
+        }
+    }
+
+
 }
 
-data class Post (var id: Int,var name:String)
+data class Post(var id: Int, var name: String)

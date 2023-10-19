@@ -18,24 +18,30 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 data class DetailScreen(private val itemId: Int) : Screen {
     @Composable
     override fun Content() {
-//        val screenModel = rememberScreenModel<DetailScreenModel> { DetailScreenModel() }
-//        val screenModel = rememberScreenModel<DetailScreenModel>()
         val screenModel = getScreenModel<DetailScreenModel>()
 
         val state by screenModel.state.collectAsState()
 
         LaunchedEffect(itemId) {
-            screenModel.getPost(itemId)
+
+            screenModel.countNumbers()
         }
 
         val navigator = LocalNavigator.current
         Column {
             when (state) {
                 is DetailScreenModel.State.Loading -> Text("loading...")
-                is DetailScreenModel.State.Result -> Text((state as DetailScreenModel.State.Result).post.name)
+                is DetailScreenModel.State.Result -> Text("${(state as DetailScreenModel.State.Result).savedId}")
                 else -> Text("errr")
             }
-            Text("Second Screen")
+            Text("count: ${screenModel.items.collectAsState().value}")
+
+            Button(onClick = {
+                screenModel.save()
+
+            }) {
+                Text("Save")
+            }
             Button(onClick = { navigator?.pop() }) {
                 Text("back")
             }
