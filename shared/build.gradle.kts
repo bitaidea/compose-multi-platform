@@ -31,10 +31,10 @@ kotlin {
             dependencies {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
-                implementation(compose.material)
+                implementation(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-
+                implementation(compose.materialIconsExtended)
                 implementation("cafe.adriel.voyager:voyager-navigator:1.0.0-rc07")
                 implementation("cafe.adriel.voyager:voyager-koin:1.0.0-rc07")
                 implementation ("io.insert-koin:koin-core:3.5.0")
