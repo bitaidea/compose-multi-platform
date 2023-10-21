@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalResourceApi::class, ExperimentalResourceApi::class)
 
-package screen
+package ui.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,15 +20,18 @@ class HomeScreen : Screen {
     override fun Content() {
         val navigator = LocalNavigator.current
 
-WaveCard {
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = { navigator?.push(DetailScreen(itemId = 123)) }) {
-            Text("View details")
+        WaveCard {
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Button(onClick = { navigator?.push(DetailScreen(itemId = 123)) }) {
+                    Text("vm db di flow")
+                }
+                Button(onClick = { navigator?.push(AddCardPage(123)) }) {
+                    Text("add card")
+                }
+
+
+            }
         }
-
-
-    }
-}
 
     }
 }

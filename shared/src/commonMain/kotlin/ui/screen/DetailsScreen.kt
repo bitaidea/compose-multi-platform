@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalResourceApi::class)
 
-package screen
+package ui.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
