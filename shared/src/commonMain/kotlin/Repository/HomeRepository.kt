@@ -28,8 +28,7 @@ class HomeRepository(
         }
     }
 
-    suspend fun save():Int{
-        delay(1000)
-        return 2131234123
+    fun save(id:Long,name:String){
+        query.insert(id,name)
     }
 }

@@ -1,6 +1,7 @@
 package screen
 
 import Repository.HomeRepository
+import androidx.compose.runtime.mutableStateOf
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
 import com.myapplication.HockeyPlayer
@@ -18,27 +19,23 @@ class DetailScreenModel(
         data class Result(val savedId: Int) : State()
     }
 
-    private val _items = MutableStateFlow<HockeyPlayer?>(null)
+    private val _items = MutableStateFlow<List<HockeyPlayer>?>(emptyList())
     val items = _items.asStateFlow()
 
     fun countNumbers() {
         coroutineScope.launch {
-            _items.value =   repository.selectAll().firstOrNull()
-//            repository.getAllList()
-//                .collect {
-//                    _items.value = it
-//                }
+            _items.value = repository.selectAll()
         }
     }
 
+    val id= mutableStateOf(0L)
+    val name = mutableStateOf("")
+
     fun save() {
         coroutineScope.launch {
-            mutableState.value = State.Loading
-            mutableState.value = State.Result(repository.save())
+            repository.save(id.value,name.value)
         }
     }
 
 
 }
-
-data class Post(var id: Int, var name: String)

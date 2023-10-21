@@ -3,12 +3,19 @@
 package screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -20,7 +27,7 @@ data class DetailScreen(private val itemId: Int) : Screen {
     override fun Content() {
         val screenModel = getScreenModel<DetailScreenModel>()
 
-        val state = screenModel.items.collectAsState().value
+        val playerList = screenModel.items.collectAsState().value
 
         LaunchedEffect(itemId) {
 
@@ -34,8 +41,31 @@ data class DetailScreen(private val itemId: Int) : Screen {
 //                is DetailScreenModel.State.Result -> Text("${(state as DetailScreenModel.State.Result).savedId}")
 //                else -> Text("errr")
 //            }
-            Text("count: ${state?.full_name}")
-            Text("name: ${state?.player_number}")
+            playerList?.forEach {
+                Row {
+                    Text(text =it.player_number.toString())
+                    Text(text =it.full_name)
+                }
+            }
+
+            Row {
+               TextField(
+                   value = screenModel.id.value.toString(),
+                   onValueChange = {
+                       screenModel.id.value =it.toLong()
+                   },
+                   placeholder = { Text(text = "id") },
+                   keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+               )
+                Spacer(modifier = Modifier.width(10.dp))
+                TextField(
+                    value = screenModel.name.value,
+                    onValueChange = {
+                        screenModel.name.value =it
+                    },
+                    placeholder = { Text(text = "name") }
+                )
+            }
 
             Button(onClick = {
                 screenModel.save()
