@@ -125,7 +125,7 @@ fun WaveAndroidTheme(
 ) {
     MaterialTheme(
         colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme(),
-//  todo      typography = Typography,
+        typography = getTypography(),
         content = content
     )
 }

@@ -9,12 +9,12 @@ import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.myapplication.MowjDatabase
 
 actual fun getPlatformName(): String = "Android"
-//@Composable
-//actual fun font(name: String, res: String, weight: FontWeight, style: FontStyle): Font {
-//    val context = LocalContext.current
-//    val id = context.resources.getIdentifier(res, "font", context.packageName)
-//    return Font(id, weight, style)
-//}
+@Composable
+actual fun font(name: String, res: String, weight: FontWeight, style: FontStyle): Font {
+    val context = LocalContext.current
+    val id = context.resources.getIdentifier(res, "font", context.packageName)
+    return Font(id, weight, style)
+}
 
 @Composable fun MainView() = App()
 
