@@ -1,12 +1,21 @@
 package screen
 
 import Repository.HomeRepository
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
+import app.cash.sqldelight.coroutines.asFlow
+import app.cash.sqldelight.coroutines.mapToList
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
 import com.myapplication.HockeyPlayer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 
 class DetailScreenModel(
@@ -24,7 +33,10 @@ class DetailScreenModel(
 
     fun countNumbers() {
         coroutineScope.launch {
-            _items.value = repository.selectAll()
+            repository.selectAll().mapToList(Dispatchers.IO).collect{
+                _items.value =it
+            }
+
         }
     }
 

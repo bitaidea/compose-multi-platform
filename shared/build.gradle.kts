@@ -8,6 +8,13 @@ plugins {
 kotlin {
     androidTarget()
 
+    jvm("desktop"){
+        compilations.all {
+            kotlinOptions.jvmTarget = "17"
+        }
+
+    }
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -31,6 +38,10 @@ kotlin {
                 implementation("cafe.adriel.voyager:voyager-navigator:1.0.0-rc07")
                 implementation("cafe.adriel.voyager:voyager-koin:1.0.0-rc07")
                 implementation ("io.insert-koin:koin-core:3.5.0")
+                implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+//                testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
             }
         }
         val androidMain by getting {
@@ -54,7 +65,17 @@ kotlin {
                 implementation("app.cash.sqldelight:native-driver:2.0.0")
             }
         }
+
+        val desktopMain by getting {
+            dependencies {
+                api(compose.preview)
+                implementation("app.cash.sqldelight:sqlite-driver:2.0.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+            }
+        }
+
     }
+
 }
 
 android {

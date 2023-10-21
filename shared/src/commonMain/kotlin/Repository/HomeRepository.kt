@@ -1,5 +1,6 @@
 package Repository
 
+import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.db.SqlDriver
 import com.myapplication.MowjDatabase
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ class HomeRepository(
     val mowjDatabase = MowjDatabase(sqlDriver)
     private val query get() = mowjDatabase.playerQueries
     suspend fun selectAll() = withContext(Dispatchers.IO) {
-        query.selectAll().executeAsList()
+        query.selectAll().asFlow()
     }
 
     fun getAllList(): Flow<Int> {
