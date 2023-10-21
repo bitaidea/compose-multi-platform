@@ -20,7 +20,7 @@ data class DetailScreen(private val itemId: Int) : Screen {
     override fun Content() {
         val screenModel = getScreenModel<DetailScreenModel>()
 
-        val state by screenModel.state.collectAsState()
+        val state = screenModel.items.collectAsState().value
 
         LaunchedEffect(itemId) {
 
@@ -29,12 +29,13 @@ data class DetailScreen(private val itemId: Int) : Screen {
 
         val navigator = LocalNavigator.current
         Column {
-            when (state) {
-                is DetailScreenModel.State.Loading -> Text("loading...")
-                is DetailScreenModel.State.Result -> Text("${(state as DetailScreenModel.State.Result).savedId}")
-                else -> Text("errr")
-            }
-            Text("count: ${screenModel.items.collectAsState().value}")
+//            when (state) {
+//                is DetailScreenModel.State.Loading -> Text("loading...")
+//                is DetailScreenModel.State.Result -> Text("${(state as DetailScreenModel.State.Result).savedId}")
+//                else -> Text("errr")
+//            }
+            Text("count: ${state?.full_name}")
+            Text("name: ${state?.player_number}")
 
             Button(onClick = {
                 screenModel.save()
