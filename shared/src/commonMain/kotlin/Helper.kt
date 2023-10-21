@@ -7,9 +7,11 @@ import screen.DetailScreenModel
 
 
 
-fun initKoin(sqlDriver: SqlDriver) {
+fun initKoin(driver:SqlDriver) {
+
+
     val homeModule = module {
-    factory { sqlDriver }
+    factory { driver }
         factory { DetailScreenModel(get()) }
         single { HomeRepository(get()) }
     }

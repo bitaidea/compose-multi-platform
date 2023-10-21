@@ -8,8 +8,8 @@ actual fun getPlatformName(): String = "Android"
 
 @Composable fun MainView() = App()
 
-actual class DriverFactory(private val context: Context) {
-    actual fun createDriver(): SqlDriver {
+ class DriverFactory(private val context: Context) {
+     fun createDriver(): SqlDriver {
         return AndroidSqliteDriver(MowjDatabase.Schema, context, "MowjDatabase.db")
     }
 }

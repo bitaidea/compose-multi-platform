@@ -4,7 +4,8 @@ import shared
 @main
 struct iOSApp: App {
  init() {
-        HelperKt.doInitKoin(DriverFactory().createDriver())
+     Main_iosKt.getPlatformName()
+     HelperKt.doInitKoin(driver: Main_iosKt.createDriver())
     }
 
 	var body: some Scene {
