@@ -9,8 +9,8 @@ actual fun getPlatformName(): String = "desktop"
 @Composable
 fun UIShow() = App()
 
-actual class DriverFactory {
-    actual fun createDriver(): SqlDriver {
+ class DriverFactory {
+     fun createDriver(): SqlDriver {
         val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
         MowjDatabase.Schema.create(driver)
         return driver
