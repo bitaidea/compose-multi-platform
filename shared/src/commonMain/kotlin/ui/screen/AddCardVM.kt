@@ -1,5 +1,6 @@
 package ui.screen
 
+import ClientApis
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.mutableStateOf
 import cafe.adriel.voyager.core.model.ScreenModel
@@ -19,6 +20,7 @@ class AddCardVM : ScreenModel {
     val firstCharge = mutableStateOf("0")
     val haveDasteChk = mutableStateOf(true)
     val shaba = mutableStateOf<String?>(null)
+    val codeStatue = mutableStateOf(0)
 
     val snackbarHostState = SnackbarHostState()
     val showSnack: (String) -> Unit =
@@ -74,5 +76,12 @@ class AddCardVM : ScreenModel {
             onCompleted()
         }
 
+    }
+
+    fun ktorTest(){
+        coroutineScope.launch(Dispatchers.IO){
+            codeStatue.value =ClientApis().getTest().status.value
+
+        }
     }
 }

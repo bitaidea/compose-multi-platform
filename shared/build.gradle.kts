@@ -27,6 +27,10 @@ kotlin {
     }
 
     sourceSets {
+        val ktorVersion = "2.3.5"
+        val coroutinesVersion = "1.7.3"
+        val serializationVersion = "1.6.0"
+        val sqlDelightVersion ="2.0.0"
         val commonMain by getting {
             dependencies {
                 implementation(compose.runtime)
@@ -38,7 +42,14 @@ kotlin {
                 implementation("cafe.adriel.voyager:voyager-navigator:1.0.0-rc07")
                 implementation("cafe.adriel.voyager:voyager-koin:1.0.0-rc07")
                 implementation ("io.insert-koin:koin-core:3.5.0")
-                implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
+                implementation("app.cash.sqldelight:coroutines-extensions:$sqlDelightVersion")
+
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
 
             }
         }
@@ -47,7 +58,8 @@ kotlin {
                 api("androidx.activity:activity-compose:1.8.0")
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.12.0")
-                implementation("app.cash.sqldelight:android-driver:2.0.0")
+                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation("app.cash.sqldelight:android-driver:$sqlDelightVersion")
             }
         }
         val iosX64Main by getting
@@ -59,15 +71,17 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
-                implementation("app.cash.sqldelight:native-driver:2.0.0")
+                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+                implementation("app.cash.sqldelight:native-driver:$sqlDelightVersion")
             }
         }
 
         val desktopMain by getting {
             dependencies {
                 api(compose.preview)
-                implementation("app.cash.sqldelight:sqlite-driver:2.0.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
+                implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation("app.cash.sqldelight:sqlite-driver:$sqlDelightVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:$coroutinesVersion")
             }
         }
 
@@ -76,7 +90,7 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
             }
         }
 

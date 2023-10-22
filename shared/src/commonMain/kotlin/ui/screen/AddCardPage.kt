@@ -59,6 +59,9 @@ data class AddCardPage(private val editCardId: Long? = null) : Screen {
             targetValue = progress.value,
             animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec
         )
+        LaunchedEffect(key1 = Unit){
+            pageVM.ktorTest()
+        }
         Scaffold(
             topBar = {
                 Column {
@@ -113,7 +116,7 @@ data class AddCardPage(private val editCardId: Long? = null) : Screen {
                 .padding(paddingValues)
                 .padding(bottom = 45.dp)
         ) {
-
+            Text("Code:${pageVM.codeStatue.value}")
             CardPreview()
             WaveCard(Modifier.padding(12.dp)) {
                 Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
