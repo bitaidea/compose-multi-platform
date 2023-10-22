@@ -15,7 +15,9 @@ fun main() {
             state = windowState,
             title = "My Project"
         ) {
-            UIShow()
+            MaterialTheme{
+                UIShow()
+            }
         }
     }
 }
