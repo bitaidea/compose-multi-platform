@@ -39,9 +39,7 @@ kotlin {
                 implementation("cafe.adriel.voyager:voyager-koin:1.0.0-rc07")
                 implementation ("io.insert-koin:koin-core:3.5.0")
                 implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
-//                testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
             }
         }
         val androidMain by getting {
@@ -50,7 +48,6 @@ kotlin {
                 api("androidx.appcompat:appcompat:1.6.1")
                 api("androidx.core:core-ktx:1.12.0")
                 implementation("app.cash.sqldelight:android-driver:2.0.0")
-
             }
         }
         val iosX64Main by getting
@@ -70,9 +67,20 @@ kotlin {
             dependencies {
                 api(compose.preview)
                 implementation("app.cash.sqldelight:sqlite-driver:2.0.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
             }
         }
+
+        val commonTest by getting{
+            dependencies{
+                implementation(kotlin("test"))
+                implementation(kotlin("test-common"))
+                implementation(kotlin("test-annotations-common"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+            }
+        }
+
+        val desktopTest by getting
 
     }
 
@@ -98,6 +106,7 @@ android {
         jvmToolchain(17)
     }
 }
+
 
 
 sqldelight {
