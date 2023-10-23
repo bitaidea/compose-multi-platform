@@ -33,6 +33,7 @@ compose.desktop {
         mainClass = "MainKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            modules("java.compiler", "java.instrument" , "java.sql", "jdk.unsupported")
             packageName = "MyApplication"
             packageVersion = "1.0.0"
         }
