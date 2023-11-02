@@ -51,7 +51,6 @@ data class AddCardPage(private val editCardId: Long? = null) : Screen {
             }
         }
 
-
 //    val resources = LocalContext.current.resources
         val progress = remember { mutableStateOf(0.0f) }
         progress.value = chkProgress()

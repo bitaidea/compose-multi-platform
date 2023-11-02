@@ -20,6 +20,18 @@ actual fun font(name: String, res: String, weight: FontWeight, style: FontStyle)
     return Font(id, weight, style)
 }
 
+
+actual object Strings {
+
+    lateinit var context: Context
+
+    actual fun get(id: String): String {
+        val resourceId = context.resources.getIdentifier(id, "string", context.packageName)
+        if (resourceId == 0) return id
+        return context.getString(resourceId)
+    }
+}
+
 actual fun httpClient(config: HttpClientConfig<*>.()-> Unit) = HttpClient(OkHttp){
     config(this)
     engine{

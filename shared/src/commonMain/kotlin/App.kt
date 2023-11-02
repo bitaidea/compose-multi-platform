@@ -21,6 +21,7 @@ fun App() {
 
 expect fun getPlatformName(): String
 
+
 @Composable
 expect fun font(
     name: String,
@@ -28,3 +29,8 @@ expect fun font(
     weight: FontWeight,
     style: FontStyle
 ): Font
+
+expect object Strings {
+
+    fun get(id: String): String
+}

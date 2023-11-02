@@ -1,0 +1,46 @@
+CREATE TABLE IF NOT EXISTS `tb_creditcard`
+(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+ `name` TEXT NOT NULL, `card_number` TEXT NOT NULL,
+  `cvv2` INTEGER NOT NULL, `expire_date` TEXT, `pass` TEXT,
+   `accountnumber` TEXT, `frstSharj` TEXT DEFAULT '0',
+    `haveDasteChk` INTEGER NOT NULL DEFAULT 1, `shaba` TEXT,
+     `bankName` TEXT NOT NULL DEFAULT 'دیگر', `cardOrder` INTEGER NOT NULL DEFAULT 0);
+
+
+getCards:
+SELECT * FROM tb_creditcard ORDER BY cardOrder;
+
+getCardById:
+SELECT * FROM tb_creditcard WHERE id =:id;
+
+getCardFromBank:
+SELECT * FROM tb_creditcard WHERE bankName LIKE :bankName;
+
+getCardFromCardNumber:
+SELECT * FROM tb_creditcard WHERE card_number LIKE :cardNumber;
+
+getCardFromBankAndCardNumber:
+SELECT * FROM tb_creditcard WHERE card_number LIKE :cardNumber AND bankName LIKE :bankName;
+
+getCardFromBankAndAccountNumber:
+SELECT * FROM tb_creditcard WHERE accountnumber LIKE :accountNumber AND bankName LIKE :bankName;
+
+getLastCardNumber:
+SELECT id FROM tb_creditcard ORDER BY  id DESC LIMIT 1;
+
+getAllTotalFirstSharje:
+SELECT sum(frstSharj) frstSharj FROM tb_creditcard;
+
+deleteCard:
+DELETE FROM tb_creditcard WHERE  id = :id;
+
+insertCard:
+INSERT INTO tb_creditcard VALUES ?;
+
+
+
+-- updateCard:
+-- analyzeCard
+
+-- INSERT INTO tb_creditcard(id,name,card_number,cvv2,accountnumber,frstSharj,haveDasteChk,shaba,bankName,cardOrder)
+-- VALUES (1,?, ?,-1,?,?,?,?,?,?);

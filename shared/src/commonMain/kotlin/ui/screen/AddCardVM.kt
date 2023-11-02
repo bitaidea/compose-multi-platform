@@ -1,17 +1,22 @@
 package ui.screen
 
 import ClientApis
+import Repository.CardRepository
+import Repository.HomeRepository
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.mutableStateOf
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
+import com.myapplication.Tb_creditcard
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 
-class AddCardVM : ScreenModel {
+class AddCardVM(
+    private val cardRepository: CardRepository
+) : ScreenModel {
 
-//    val editCard = mutableStateOf<Card?>(null)
+    val editCard = mutableStateOf<Tb_creditcard?>(null)
 
     val name = mutableStateOf("")
     val cardNumber = mutableStateOf("")
@@ -58,21 +63,27 @@ class AddCardVM : ScreenModel {
             showSnack("شماره شبا باید ۲۴ رقم یا خالی باشد.")
             return
         } else {
-//            viewModelScope.launch(Dispatchers.IO) {
-//                val card = Card(
-//                    id = editCard.value?.id ?: (cardRepository.getLastCardId() + 1),
-//                    name = name.value,
-//                    card_number = cardNumber.value,
-//                    bankName = bankName.value,
-//                    accountnumber = accountNumber.value,
-//                    firstCharge = firstCharge.value,
-//                    haveDasteChk = if (haveDasteChk.value) 1 else 0,
-//                    shaba = shaba.value
-//                )
-//                if (editCard.value == null)
-//                    cardRepository.addCard(card)
+            coroutineScope.launch(Dispatchers.IO) {
+
+                val card = Tb_creditcard(
+//                    id = editCard.value?.id ,
+                    id = 1 ,
+                    name = name.value,
+                    card_number = cardNumber.value,
+                    bankName = bankName.value,
+                    accountnumber = accountNumber.value,
+                    frstSharj = firstCharge.value,
+                    haveDasteChk = if (haveDasteChk.value) 1 else 0,
+                    shaba = shaba.value,
+                    cardOrder = 0,
+                    cvv2 = -1,
+                    expire_date = null,
+                    pass =null
+                )
+                if (editCard.value == null)
+                    cardRepository.addCard(card)
 //                else cardRepository.updateCard(card)
-//            }
+            }
             onCompleted()
         }
 

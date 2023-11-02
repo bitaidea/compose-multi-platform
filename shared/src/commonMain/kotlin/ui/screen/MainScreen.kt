@@ -2,6 +2,9 @@
 
 package ui.screen
 
+import Strings
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
@@ -12,10 +15,12 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import ui.component.core.WaveCard
 
 
 class HomeScreen : Screen {
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.current
@@ -26,9 +31,13 @@ class HomeScreen : Screen {
                     Text("vm db di flow")
                 }
                 Button(onClick = { navigator?.push(AddCardPage(123)) }) {
-                    Text("add card")
+                    Text(Strings.get("err"))
                 }
 
+                    Image(
+                        painterResource("compose-multiplatform.xml"),
+                        null
+                    )
 
             }
         }

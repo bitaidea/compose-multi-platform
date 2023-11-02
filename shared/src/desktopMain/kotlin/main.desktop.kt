@@ -2,6 +2,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.platform.Font
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import com.myapplication.MowjDatabase
@@ -37,4 +38,4 @@ actual fun httpClient(config: HttpClientConfig<*>.()-> Unit) = HttpClient(OkHttp
 
 @Composable
 actual fun font(name: String, res: String, weight: FontWeight, style: FontStyle): Font =
-    androidx.compose.ui.text.platform.Font("font/$res.ttf", weight, style)
+  Font("font/$res.ttf", weight, style)
